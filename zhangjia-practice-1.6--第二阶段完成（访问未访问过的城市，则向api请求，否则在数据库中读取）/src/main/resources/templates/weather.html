@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <title>weather forecast</title>
+</head>
+<body>
+
+<h2>-----title------</h2>
+
+<script th:inline="javascript">
+
+    var todayWeatherTest = [[${TodayWth}]];
+    var WthSetTest =  [[${WthSet}]] ;    //数组来的
+    var errorTest = [[${error}]];
+
+    if(todayWeatherTest!=null) {
+        document.write("<h2>今日天气</h2>");
+        document.write("时间：" + todayWeatherTest.date+todayWeatherTest.week);
+        document.write("<br>");
+        document.write("地点：" + todayWeatherTest.city);
+        document.write("<br>");
+        document.write("温度：" + todayWeatherTest.wendu);
+        document.write("<br>");
+        document.write("湿度：" + todayWeatherTest.shidu);
+        document.write("<br>");
+        document.write("温馨提示：" + todayWeatherTest.ganmao);
+        document.write("<br>");
+        document.write("空气质量：" + todayWeatherTest.quality);
+        document.write("<br>");
+        document.write("Pm2.5：" + todayWeatherTest.pm25);
+        document.write("<br>");
+        document.write("PM1.0：" + todayWeatherTest.pm10);
+        document.write("<br>");
+
+        //想要在html中使用js中的数据，可以用vue.js(比较方便、简单)
+        if (WthSetTest != null) {
+            for (var i in WthSetTest) {
+                if (i === 0)
+                    document.write("<h2>昨日天气</h2>");
+                else
+                    document.write("<h2>天气展望</h2>");
+                document.write("时间: " + WthSetTest[i].date + "<br>");
+                document.write("日出：" + WthSetTest[i].sunrise + "<br>");
+                document.write("最高气温：" + WthSetTest[i].sunrise + "<br>");
+                document.write("最低气温：" + WthSetTest[i].sunset + "<br>");
+                document.write("aqi：" + WthSetTest[i].aqi + "<br>");
+                document.write("fx：" + WthSetTest[i].fx + "<br>");
+                document.write("fl：" + WthSetTest[i].fl + "<br>");
+                document.write("天气：" + WthSetTest[i].type + "<br>");
+                document.write("温馨提示：" + WthSetTest[i].notice + "<br>");
+            }
+
+        }
+
+        if (errorTest != null) {
+            document.write(errorTest.toString());
+        }
+    }
+
+
+</script>
+</body>
+</html>
